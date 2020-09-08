@@ -74,7 +74,6 @@ export default {
             this.startWork = true;
           } else {
             this.startWork = false;
-            // this.startWork = true;
           }
         } else if (msgtype === "SendCharName") {
           // 获取角色名字

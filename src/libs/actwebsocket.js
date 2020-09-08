@@ -113,7 +113,6 @@ class ActWebsocketInterface {
           document.dispatchEvent(new CustomEvent("onBroadcastMessage", { detail: obj }));
         }
         if (type === "send") {
-          console.log(obj);
           document.dispatchEvent(new CustomEvent("onRecvMessage", { detail: obj }));
         }
         if (type === "set_id") {
@@ -124,7 +123,6 @@ class ActWebsocketInterface {
   }
   onerror(evt) {
     this.websocket.close();
-    console.log(evt);
   }
   getQuerySet() {
     const querySet = {};
