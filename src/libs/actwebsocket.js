@@ -106,7 +106,6 @@ class ActWebsocketInterface {
       // ping pong
       this.websocket.send(".");
     } else {
-      console.log('evt', evt);
       try {
         const obj = JSON.parse(evt.data);
         let { type } = obj;
