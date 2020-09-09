@@ -69,7 +69,7 @@ export default {
         } = e;
         if (msgtype === "ChangeZone") {
           // 区域切换
-          if (msg.zoneID === 694) {
+          if (msg.zoneID === 887) {
             // 绝亚
             this.startWork = true;
           } else {
