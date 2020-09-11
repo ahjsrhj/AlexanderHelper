@@ -1,7 +1,7 @@
 <!-- @format -->
 
 <template>
-  <div class="container" :class="{ 'bg-alert': disparityHP >= 5 }">
+  <div class="container" :class="{ 'bg-alert': disparityHP >= 5 }" @click.right="onRightClick">
     <div v-if="boss.maxHP > 0" class="hp-line">
       <div class="hp-name">有生命活水</div>
       <div class="hp-percent">{{ bossPercent }}%</div>
@@ -19,7 +19,7 @@
 
 <script>
 import { Player } from "./store";
-import { bossHPRegexStr, handHPRegexStr } from "./const";
+import { bossHPRegexStr, handHPRegexStr, wipeRegexStr } from "./const";
 
 export default {
   name: "App",
@@ -73,6 +73,7 @@ export default {
             // 绝亚
             this.startWork = true;
           } else {
+            this.resetInfo();
             this.startWork = false;
           }
         } else if (msgtype === "SendCharName") {
@@ -95,9 +96,21 @@ export default {
               this.hand.maxHP = list[2];
               this.hand.currentHP = list[1];
             }
+          } else if (wipeRegexStr.test(msg)) {
+            // 团灭重置
+            this.resetInfo();
           }
         }
       });
+    },
+    resetInfo() {
+      this.boss.maxHP = 0;
+      this.boss.currentHP = 0;
+      this.hand.maxHP = 0;
+      this.hand.currentHP = 0;
+    },
+    onRightClick() {
+      console.log('right click')
     },
   },
 };
