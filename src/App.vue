@@ -3,11 +3,11 @@
 <template>
   <div class="container" :class="{ 'bg-alert': disparityHP >= 5 }" @click.right="onRightClick">
     <div v-if="boss.maxHP > 0" class="hp-line">
-      <div class="hp-name">有生命活水</div>
+      <div class="hp-name" :class="{ 'hp-name-light': handPercent > 0 && bossPercent < handPercent }">有生命活水</div>
       <div class="hp-percent">{{ bossPercent }}%</div>
     </div>
     <div v-if="hand.maxHP > 0" class="hp-line">
-      <div class="hp-name">活水之手</div>
+      <div class="hp-name" :class="{ 'hp-name-light': handPercent > 0 && bossPercent > handPercent }">活水之手</div>
       <div class="hp-percent">{{ handPercent }}%</div>
     </div>
     <div v-if="hand.maxHP > 0" class="hp-line">
@@ -153,5 +153,8 @@ export default {
   font-size: 20px;
   font-weight: bolder;
   text-shadow: 0.2rem 0rem 0.5rem red, -0.2rem 0rem 0.5rem red, 0rem 0.2rem 0.5rem red, 0rem -0.2rem 0.5rem red;
+}
+.hp-name-light {
+  color: red;
 }
 </style>
