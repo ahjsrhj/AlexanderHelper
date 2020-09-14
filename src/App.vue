@@ -88,6 +88,10 @@ export default {
             if (list.length === 3) {
               this.boss.maxHP = list[2];
               this.boss.currentHP = list[1];
+              if (this.boss.currentHP <= 0) {
+                // 杀死了，用不到了
+                this.resetInfo();
+              }
             }
           } else if (handHPRegexStr.test(msg)) {
             // 手血量
@@ -110,7 +114,7 @@ export default {
       this.hand.currentHP = 0;
     },
     onRightClick() {
-      console.log('right click')
+      console.log("right click");
     },
   },
 };
