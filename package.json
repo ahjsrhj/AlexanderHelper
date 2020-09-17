@@ -8,11 +8,21 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "vue": "^3.0.0-rc.1"
+    "rxjs": "^6.6.3",
+    "vue": "^3.0.0-rc.1",
+    "vue-router": "4.0.0-beta.9",
+    "vuex": "4.0.0-beta.4"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.1.1",
+    "@typescript-eslint/parser": "^4.1.1",
     "@vue/compiler-sfc": "^3.0.0-rc.1",
+    "eslint": "^7.9.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-vue": "^6.2.2",
     "gh-pages": "^3.1.0",
+    "typescript": "^4.0.2",
     "vite": "^1.0.0-rc.1"
   }
 }
