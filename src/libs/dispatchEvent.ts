@@ -1,4 +1,3 @@
-// import * as Rx from 'rxjs'
 import { filter, map } from 'rxjs/operators'
 import initActWebSocket from './actWebsocket'
 import initOverlayPluginEvent from './overlayPluginCommon'
