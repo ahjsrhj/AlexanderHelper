@@ -5,10 +5,10 @@
   align-items: center;
   width: 100%;
   height: 100%;
+  border-radius: 10px;
 }
 .bg-alert {
   background-color: #e03c8a43;
-  border-radius: 10px;
 }
 .hp-line {
   display: flex;
@@ -32,6 +32,9 @@
   font-weight: bolder;
   text-shadow: 0.2rem 0rem 0.5rem red, -0.2rem 0rem 0.5rem red,
     0rem 0.2rem 0.5rem red, 0rem -0.2rem 0.5rem red;
+}
+.hp-disparity {
+  font-size: 30px;
 }
 .hp-name-light {
   color: red;

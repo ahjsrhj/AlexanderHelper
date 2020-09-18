@@ -3,7 +3,13 @@ import { filter, map } from 'rxjs/operators'
 import initActWebSocket from './actWebsocket'
 import initOverlayPluginEvent from './overlayPluginCommon'
 import store from '../store'
-import { p1BossHPReg, p1HandHPReg, wipeReg } from '../const'
+import {
+  p1BossHPReg,
+  p1HandHPReg,
+  p2MainHPReg,
+  p2SubHPReg,
+  wipeReg,
+} from '../const'
 import { IHPInfo } from '../model/actModel'
 
 const subject = initActWebSocket() || initOverlayPluginEvent()
@@ -18,7 +24,7 @@ subject
 
 const getHPInfo = (regex: RegExp, str: string): IHPInfo => {
   const list = regex.exec(str)
-  const [, maxHP, currentHP] = list!
+  const [, currentHP, maxHP] = list!
 
   return {
     maxHP: +maxHP,
@@ -31,16 +37,28 @@ subject
   .pipe(filter(data => data.type === 'LogLine'))
   .pipe(map(data => data.rawLine as string))
   .subscribe(rawLine => {
-    if (p1BossHPReg.test(rawLine)) {
-      const info = getHPInfo(p1BossHPReg, rawLine)
-      store.dispatch('info/updateP1BossInfo', info)
-    } else if (
-      store.state.info.p1Boss.currentHP > 0 &&
-      p1HandHPReg.test(rawLine)
-    ) {
-      const info = getHPInfo(p1HandHPReg, rawLine)
-      store.dispatch('info/updateP1HandInfo', info)
-    } else if (wipeReg.test(rawLine)) {
+    if (wipeReg.test(rawLine)) {
       store.dispatch('info/resetHPInfo')
+    } else if (!store.state.info.p1Pass) {
+      // p1 check
+      if (p1BossHPReg.test(rawLine)) {
+        const info = getHPInfo(p1BossHPReg, rawLine)
+        store.dispatch('info/updateP1BossInfo', info)
+      } else if (
+        store.state.info.p1Boss.currentHP > 0 &&
+        p1HandHPReg.test(rawLine)
+      ) {
+        const info = getHPInfo(p1HandHPReg, rawLine)
+        store.dispatch('info/updateP1HandInfo', info)
+      }
+    } else {
+      // p2 check
+      if (p2MainHPReg.test(rawLine)) {
+        const info = getHPInfo(p2MainHPReg, rawLine)
+        store.dispatch('info/updateP2MainInfo', info)
+      } else if (p2SubHPReg.test(rawLine)) {
+        const info = getHPInfo(p2SubHPReg, rawLine)
+        store.dispatch('info/updateP2SubInfo', info)
+      }
     }
   })

@@ -2,7 +2,7 @@ import { createStore, createLogger } from 'vuex'
 import config, { IConfigState } from './modules/config'
 import info, { IInfoState } from './modules/info'
 
-interface IStoreState {
+export interface IStoreState {
   info: IInfoState
   config: IConfigState
 }

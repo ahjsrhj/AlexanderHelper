@@ -33,6 +33,7 @@ OverlayPluginApi.callHandler(
 {
   type: 'ChangeZone',
   zoneID: 887
+  zoneName: '白银乡'
 }
 ```
 4. ChangePrimaryPlayer

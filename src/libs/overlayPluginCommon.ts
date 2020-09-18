@@ -24,13 +24,13 @@ function addOverlayListener(events: string[] = ['LogLine', 'ChangeZone']) {
       call: 'subscribe',
       events,
     }),
+    (e: any) => console.log('register done', e),
   )
 }
 
 export default function initOverlayPluginEvent(): Rx.Subject<ILogMessage> {
   const subject = new Rx.Subject<ILogMessage>()
   const checkSubscription = Rx.timer(0, 300)
-    .pipe(tap(n => console.log('ping! pong!', n)))
     .pipe(
       filter(() => window.OverlayPluginApi && window.OverlayPluginApi.ready),
     )
