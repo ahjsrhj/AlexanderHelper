@@ -6,7 +6,7 @@ import router from './router'
 import store from './store'
 import './style/index.css'
 import './libs/dispatchEvent'
-import './test'
+// import './test'
 
 window.oncontextmenu = (e: MouseEvent) => {
   //取消默认的浏览器自带右键

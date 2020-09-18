@@ -1,5 +1,8 @@
 <template lang="pug">
-.container( :class="{ 'bg-alert': state.isP1 && state.disparityHP >= 5 }" @click.right="onRightClick" )
+.container(
+  :class="{ 'bg-alert': state.isP1 && state.disparityHP >= 5, 'container-border': config.border }"
+  :style="{transform: `scale(${config.scale})`}"
+)
   .hp-line(v-if="state.mainBoss.value > 0")
     .hp-name(
       :class="{ 'hp-name-light': state.subBoss.value > 0 && state.mainBoss.value < state.subBoss.value }"
@@ -19,6 +22,7 @@
 <script lang="ts">
 import { reactive, ref, defineComponent, Ref, onUnmounted } from 'vue'
 import store from '../store'
+import router from '../router'
 import '../style/home.css'
 
 function useVuex<T>(getState: () => T): Ref<T> {
@@ -33,18 +37,30 @@ function useVuex<T>(getState: () => T): Ref<T> {
 }
 
 export default defineComponent({
-  setup() {
-    const onRightClick = () => {}
+  setup(props, context) {
     const state = reactive({
       mainBoss: useVuex<number>(() => store.getters['info/mainBoss']),
       subBoss: useVuex<number>(() => store.getters['info/subBoss']),
       disparityHP: useVuex<number>(() => store.getters['info/disparityHP']),
       isP1: useVuex<number>(() => store.getters['info/isP1']),
     })
+    const query = router.currentRoute.value.query
+    let scale = query.scale && Number(query.scale) ? Number(query.scale) : 1
+    if (scale <= 0) {
+      scale = 1
+    }
+    let border = query.border && Number(query.border) ? Number(query.border) : 0
+    if (border != 1 && border != 0) {
+      border = 0
+    }
+    const config = reactive({
+      scale,
+      border: border === 1,
+    })
 
     return {
       state,
-      onRightClick,
+      config,
     }
   },
 })

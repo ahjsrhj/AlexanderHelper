@@ -1,4 +1,7 @@
-import { createStore, createLogger } from 'vuex'
+import {
+  createStore,
+  // createLogger
+} from 'vuex'
 import config, { IConfigState } from './modules/config'
 import info, { IInfoState } from './modules/info'
 
@@ -12,7 +15,7 @@ const store = createStore<IStoreState>({
     config,
     info,
   },
-  plugins: [createLogger()],
+  // plugins: [createLogger()],
 })
 
 export default store
