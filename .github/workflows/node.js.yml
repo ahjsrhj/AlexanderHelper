@@ -24,6 +24,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: mkdir -p ~/.ssh/
     - run: echo "${{ secrets.ID_RSA_REPO }}" > ~/.ssh/id_rsa
     - run: git config --global user.email "hexrhj@gmail.com"
     - run: git config --global user.name "Hexer"
