@@ -24,5 +24,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: echo ${{ secrets.ID_RSA_REPO }} > ~/.ssh/id_rsa
+    - run: git config --global user.email "hexrhj@gmail.com"
+    - run: git config --global user.name "Hexer"
     - run: npm install
     - run: npm run deploy
