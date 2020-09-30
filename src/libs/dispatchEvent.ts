@@ -2,13 +2,7 @@ import { filter, map } from 'rxjs/operators'
 import initActWebSocket from './actWebsocket'
 import initOverlayPluginEvent from './overlayPluginCommon'
 import store from '../store'
-import {
-  p1BossHPReg,
-  p1HandHPReg,
-  p2MainHPReg,
-  p2SubHPReg,
-  wipeReg,
-} from '../const'
+import { wipeReg } from '../const'
 import { IHPInfo } from '../model/actModel'
 
 const subject = initActWebSocket() || initOverlayPluginEvent()
@@ -30,7 +24,6 @@ const getHPInfo = (regex: RegExp, str: string): IHPInfo => {
     currentHP: +currentHP,
   }
 }
-
 subject
   .pipe(filter(() => store.state.info.enabled))
   .pipe(filter(data => data.type === 'LogLine'))
@@ -39,7 +32,10 @@ subject
     if (wipeReg.test(rawLine)) {
       store.dispatch('info/resetHPInfo')
     } else if (!store.state.info.p1Pass) {
+      const p1BossHPReg = store.getters['config/p1MainRegex']
+      const p1HandHPReg = store.getters['config/p1SubRegex']
       // p1 check
+      // debugger
       if (p1BossHPReg.test(rawLine)) {
         const info = getHPInfo(p1BossHPReg, rawLine)
         store.dispatch('info/updateP1BossInfo', info)
@@ -52,6 +48,8 @@ subject
       }
     } else {
       // p2 check
+      const p2MainHPReg = store.getters['config/p2MainRegex']
+      const p2SubHPReg = store.getters['config/p2SubRegex']
       if (p2MainHPReg.test(rawLine)) {
         const info = getHPInfo(p2MainHPReg, rawLine)
         store.dispatch('info/updateP2MainInfo', info)

@@ -1,5 +1,6 @@
 import { Module } from 'vuex'
 import { IHPInfo } from '../../model/actModel'
+import { IStoreState } from '../index'
 
 const MUTATION_UPDATE_ZONE_ID = 'MUTATION_UPDATE_ZONE_ID'
 const MUTATION_UPDATE_P1_BOSS = 'MUTATION_UPDATE_P1_BOSS'
@@ -31,7 +32,7 @@ export interface IInfoState {
   p1Pass: boolean
 }
 
-const module: Module<IInfoState, any> = {
+const module: Module<IInfoState, IStoreState> = {
   namespaced: true,
   state: {
     zoneID: 0,
@@ -131,22 +132,22 @@ const module: Module<IInfoState, any> = {
       const { p2Main, p2Sub } = state
       return p2Main.currentHP > 0 || p2Sub.currentHP > 0
     },
-    mainBoss(state: IInfoState, getters) {
+    mainBoss(state: IInfoState, getters, rootState) {
       if (getters.isP1) {
-        return calcValue(state.p1Boss, '有生命活水')
+        return calcValue(state.p1Boss, rootState.config.names.p1Main)
       } else if (getters.isP2) {
-        return calcValue(state.p2Main, '残暴正义号')
+        return calcValue(state.p2Main, rootState.config.names.p2Main)
       }
       return {
         name: '',
         value: 0,
       }
     },
-    subBoss(state: IInfoState, getters) {
+    subBoss(state: IInfoState, getters, rootState) {
       if (getters.isP1) {
-        return calcValue(state.p1Hand, '活水之手')
+        return calcValue(state.p1Hand, rootState.config.names.p1Sub)
       } else if (getters.isP2) {
-        return calcValue(state.p2Sub, '巡航驱逐者')
+        return calcValue(state.p2Sub, rootState.config.names.p2Sub)
       }
       return {
         name: '',

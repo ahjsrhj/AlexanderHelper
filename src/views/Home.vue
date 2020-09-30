@@ -37,27 +37,17 @@ function useVuex<T>(getState: () => T): Ref<T> {
 }
 
 export default defineComponent({
-  setup(props, context) {
+  setup(props, contextany) {
     const state = reactive({
-      mainBoss: useVuex<number>(() => store.getters['info/mainBoss']),
-      subBoss: useVuex<number>(() => store.getters['info/subBoss']),
+      mainBoss: useVuex<any>(() => store.getters['info/mainBoss']),
+      subBoss: useVuex<any>(() => store.getters['info/subBoss']),
       disparityHP: useVuex<number>(() => store.getters['info/disparityHP']),
-      isP1: useVuex<number>(() => store.getters['info/isP1']),
+      isP1: useVuex<boolean>(() => store.getters['info/isP1']),
     })
-    const query = router.currentRoute.value.query
-    let scale = query.scale && Number(query.scale) ? Number(query.scale) : 1
-    if (scale <= 0) {
-      scale = 1
-    }
-    let border = query.border && Number(query.border) ? Number(query.border) : 0
-    if (border != 1 && border != 0) {
-      border = 0
-    }
     const config = reactive({
-      scale,
-      border: border === 1,
+      border: useVuex<boolean>(() => store.state.config.border),
+      scale: useVuex<number>(() => store.state.config.scale),
     })
-
     return {
       state,
       config,
