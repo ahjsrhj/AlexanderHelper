@@ -5,6 +5,7 @@ import {
   p2MainName,
   p2SubName,
   getEnemyHPRegex,
+  getP2TransitionRegex,
 } from '../../const'
 
 const MUTATION_UPDATE_SCALE = 'MUTATION_UPDATE_SCALE'
@@ -71,6 +72,7 @@ const module: Module<IConfigState, any> = {
     p1SubRegex: state => getEnemyHPRegex(state.names.p1Sub),
     p2MainRegex: state => getEnemyHPRegex(state.names.p2Main),
     p2SubRegex: state => getEnemyHPRegex(state.names.p2Sub),
+    p2TransitionRegex: state => getP2TransitionRegex(state.names.p1Main),
   },
 }
 

@@ -7,6 +7,8 @@ export const p2SubHPReg = /^37\|.{33}\|.{8}\|巡航驱逐者\|.{8}\|(\d+)\|(\d+)
 
 export const wipeReg = /^33\|.{33}\|.{8}\|4000001[026].+$/
 
+export const p2Transition = /^04\|.{33}\|.{8}\|有生命活水\|.+$/
+
 export const p1MainName = '有生命活水'
 export const p1SubName = '活水之手'
 export const p2MainName = '残暴正义号'
@@ -14,6 +16,14 @@ export const p2SubName = '巡航驱逐者'
 
 export const getEnemyHPRegex = (name: string) =>
   new RegExp('^37\\|.{33}\\|.{8}\\|' + name + '\\|.{8}\\|(\\d+)\\|(\\d+)\\|.+$')
+
+/**
+ * 04 移除成员
+ *
+ * @param {string} name
+ */
+export const getP2TransitionRegex = (name: string) =>
+  new RegExp('^04\\|.{33}\\|.{8}\\|' + name + '\\|.+$')
 
 export default {
   p1BossHPReg,
@@ -26,4 +36,5 @@ export default {
   p2MainName,
   p2SubName,
   getEnemyHPRegex,
+  getP2TransitionRegex,
 }

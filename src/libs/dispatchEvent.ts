@@ -34,6 +34,7 @@ subject
     } else if (!store.state.info.p1Pass) {
       const p1BossHPReg = store.getters['config/p1MainRegex']
       const p1HandHPReg = store.getters['config/p1SubRegex']
+      const p2TransitionReg = store.getters['config/p2TransitionRegex']
       // p1 check
       // debugger
       if (p1BossHPReg.test(rawLine)) {
@@ -45,6 +46,12 @@ subject
       ) {
         const info = getHPInfo(p1HandHPReg, rawLine)
         store.dispatch('info/updateP1HandInfo', info)
+      } else if (p2TransitionReg.test(rawLine)) {
+        // p1boss被移除
+        store.dispatch('info/updateP1BossInfo', {
+          currentHP: 0,
+          maxHP: 0,
+        })
       }
     } else {
       // p2 check
