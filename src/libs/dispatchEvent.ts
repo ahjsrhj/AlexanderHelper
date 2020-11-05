@@ -46,7 +46,10 @@ subject
       ) {
         const info = getHPInfo(p1HandHPReg, rawLine)
         store.dispatch('info/updateP1HandInfo', info)
-      } else if (p2TransitionReg.test(rawLine)) {
+      } else if (
+        store.state.info.p1Boss.maxHP > 0 &&
+        p2TransitionReg.test(rawLine)
+      ) {
         // p1boss被移除
         store.dispatch('info/updateP1BossInfo', {
           currentHP: 0,

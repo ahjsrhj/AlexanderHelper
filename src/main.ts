@@ -7,7 +7,7 @@ import store from './store'
 import './style/index.css'
 import './libs/dispatchEvent'
 import { p1MainName, p1SubName, p2MainName, p2SubName } from './const'
-// import './test'
+import './test'
 
 const query = router.currentRoute.value.query
 
