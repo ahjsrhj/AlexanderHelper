@@ -1,6 +1,6 @@
-/** @format */
+import vue from '@vitejs/plugin-vue'
 
-module.exports = {
-  // base: "./",
-  base: "https://cdn.jsdelivr.net/gh/ahjsrhj/AlexanderHelper@gh-pages/",
-};
+export default {
+  plugins: [vue()],
+  base: 'https://cdn.jsdelivr.net/gh/ahjsrhj/AlexanderHelper@gh-pages/',
+}
