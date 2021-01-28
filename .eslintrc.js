@@ -1,25 +1,23 @@
 module.exports = {
   root: true,
-  parser: '@typescript-eslint/parser',
-  extends: [
-    'plugin:vue/essential',
-    'eslint:recommended',
-    '@vue/typescript/recommended',
-    '@vue/prettier',
-    '@vue/prettier/@typescript-eslint',
-  ],
-  parserOptions: {
-    parser: '@typescript-eslint/parser', // Specifies the ESLint parser
-    ecmaVersion: 2020, // Allows for the parsing of modern ECMAScript features
-    sourceType: 'module', // Allows for the use of imports
-    ecmaFeatures: {
-      // tsx: true, // Allows for the parsing of JSX
-      jsx: true,
-    },
-  },
-  rules: {},
   env: {
     node: true,
-    browser: true,
+  },
+  extends: [
+    'plugin:vue/vue3-essential',
+    'eslint:recommended',
+    '@vue/typescript/recommended',
+  ],
+  parserOptions: {
+    ecmaVersion: 2020,
+  },
+  rules: {
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
+    'no-empty': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/ban-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
   },
 }
